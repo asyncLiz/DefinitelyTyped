@@ -91,61 +91,80 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin';
  *
  * See [ThemableMixin – how to apply styles for shadow parts](https://github.com/vaadin/vaadin-themable-mixin/wiki)
  */
-export class OverlayElement extends ThemableMixin(PolymerElement) {
+export class OverlayElement<T = any> extends ThemableMixin(PolymerElement) {
     static readonly template: HTMLTemplateElement;
     static readonly is: string;
     static readonly observers: string[];
-    ready(): void;
+    opened: boolean;
     /**
-     * @event vaadin-overlay-close
-     * fired before the `vaadin-overlay` will be closed. If canceled the closing of the overlay is canceled as well.
+     * Owner element passed with renderer function
      */
+    owner?: Element | null;
+    /**
+     * Custom function for rendering the content of the overlay.
+     * Receives three arguments:
+     *
+     * - `root` The root container DOM element. Append your content to it.
+     * - `owner` The host element of the renderer function.
+     * - `model` The object with the properties related with rendering.
+     */
+    renderer?: (root: Element, owner: Element, model: T) => void;
+    /**
+     * The template of the overlay content.
+     */
+    template?: HTMLTemplateElement | null;
+    /**
+     * Optional argument for `Polymer.Templatize.templatize`.
+     */
+    instanceProps?: object | null;
+    /**
+     * References the content container after the template is stamped.
+     */
+    content?: Node | null;
+    withBackdrop: boolean;
+    /**
+     * Object with properties that is passed to `renderer` function
+     */
+    model?: T | null;
+    /**
+     * When true the overlay won't disable the main content, showing
+     * it doesn’t change the functionality of the user interface.
+     */
+    modeless: boolean;
+    /**
+     * When set to true, the overlay is hidden. This also closes the overlay
+     * immediately in case there is a closing animation in progress.
+     */
+    hidden: boolean;
+    /**
+     * When true move focus to the first focusable element in the overlay,
+     * or to the overlay if there are no focusable elements.
+     */
+    focusTrap: boolean;
+    /**
+     * Set to true to enable restoring of focus when overlay is closed.
+     */
+    restoreFocusOnClose: boolean;
     close(sourceEvent: Event): void;
-    connectedCallback(): void;
-    disconnectedCallback(): void;
     /**
      * Manually invoke existing renderer.
      */
     render(): void;
+    addEventListener<K extends keyof OverlayElementEventMap>(type: K, listener: (this: OverlayElement, ev: OverlayElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
 }
 
-/**
- * fired before the `vaadin-overlay` will be closed. If canceled the closing of the overlay is canceled as well.
- */
-export interface OverlayCloseEvent extends CustomEvent<{ sourceEvent: Event; }> {
-    type: 'vaadin-overlay-close';
-}
-
-/**
- * fired before the `vaadin-overlay` will be closed on outside click. If canceled the closing of the overlay is canceled as well.
- */
-export interface OverlayOutsideClickEvent extends CustomEvent<{ sourceEvent: Event; }> {
-    type: 'vaadin-overlay-outside-click';
-}
-
-/**
- * fired before the `vaadin-overlay` will be closed on ESC button press. If canceled the closing of the overlay is canceled as well.
- */
-export interface OverlayEscapePressEvent extends CustomEvent<{ sourceEvent: Event; }> {
-    type: 'vaadin-overlay-escape-press';
-}
-
-/**
- * fired after the `vaadin-overlay` is opened.
- */
-export interface OverlayOpenEvent extends CustomEvent {
-    type: 'vaadin-overlay-open';
+export interface OverlayElementEventMap extends HTMLElementEventMap {
+    'opened-changed': CustomEvent<{ value: boolean; path: 'opened'; }>;
+    'template-changed': CustomEvent<{ value?: HTMLTemplateElement | null; path: 'template'; }>;
+    'content-changed': CustomEvent<{ value?: Node | null; path: 'content'; }>;
+    'vaadin-overlay-close': CustomEvent<{ sourceEvent: Event; }>;
+    'vaadin-overlay-outside-click': CustomEvent<{ sourceEvent: Event; }>;
+    'vaadin-overlay-escape-press': CustomEvent<{ sourceEvent: Event; }>;
+    'vaadin-overlay-open': CustomEvent;
 }
 
 declare global {
     interface HTMLElementTagNameMap {
         'vaadin-overlay': OverlayElement;
-    }
-
-    interface HTMLElementEventMap {
-        'vaadin-overlay-close': OverlayCloseEvent;
-        'vaadin-overlay-outside-click': OverlayCloseEvent;
-        'vaadin-overlay-escape-press': OverlayEscapePressEvent;
-        'vaadin-overlay-open': OverlayOpenEvent;
     }
 }

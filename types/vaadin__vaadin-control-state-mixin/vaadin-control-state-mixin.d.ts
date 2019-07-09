@@ -6,11 +6,11 @@ export interface ControlStateMixin {
     /**
      * Specify that this control should have input focus when the page loads.
      */
-    autofocus?: boolean;
+    autofocus?: boolean | null;
     /**
      * If true, the user cannot interact with this element.
      */
-    disabled?: boolean;
+    disabled?: boolean | null;
     ready(): void;
     connectedCallback(): void;
     disconnectedCallback(): void;

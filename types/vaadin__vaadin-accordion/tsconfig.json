@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": [
+            "es6", "dom"
+        ],
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "baseUrl": "../",
+        "typeRoots": [
+            "../"
+        ],
+        "paths": {
+            "@vaadin/vaadin-accordion": [
+                "vaadin__vaadin-accordion"
+            ],
+            "@vaadin/vaadin-details/*": [
+                "vaadin__vaadin-details/*"
+            ],
+            "@vaadin/vaadin-element-mixin": [
+                "vaadin__vaadin-element-mixin"
+            ],
+            "@vaadin/vaadin-themable-mixin": [
+                "vaadin__vaadin-themable-mixin"
+            ]
+        },
+        "types": [],
+        "noEmit": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "index.d.ts",
+        "vaadin-accordion.d.ts",
+        "src/vaadin-accordion-panel.d.ts",
+        "src/vaadin-accordion.d.ts",
+        "theme/lumo/vaadin-accordion-panel.d.ts",
+        "theme/lumo/vaadin-accordion.d.ts",
+        "theme/material/vaadin-accordion-panel.d.ts",
+        "theme/material/vaadin-accordion.d.ts",
+        "vaadin__vaadin-accordion-tests.ts"
+    ]
+}

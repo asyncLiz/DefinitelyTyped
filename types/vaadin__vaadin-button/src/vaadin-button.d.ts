@@ -41,8 +41,6 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin';
 export class ButtonElement extends ElementMixin(ControlStateMixin(ThemableMixin(GestureEventListeners(PolymerElement)))) {
     static readonly is: string;
     static readonly version: string;
-    ready(): void;
-    disconnectedCallback(): void;
     readonly focusElement: HTMLButtonElement;
 }
 
