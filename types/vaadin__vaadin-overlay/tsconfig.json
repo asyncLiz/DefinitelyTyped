@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": [
+            "es6", "dom"
+        ],
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "baseUrl": "../",
+        "typeRoots": [
+            "../"
+        ],
+        "paths": {
+            "@vaadin/vaadin-overlay": [
+                "vaadin__vaadin-overlay"
+            ],
+            "@vaadin/vaadin-themable-mixin": [
+                "vaadin__vaadin-themable-mixin"
+            ]
+        },
+        "types": [],
+        "noEmit": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "index.d.ts",
+        "vaadin-overlay.d.ts",
+        "src/vaadin-focusables-helper.d.ts",
+        "src/vaadin-overlay.d.ts",
+        "theme/lumo/vaadin-overlay.d.ts",
+        "theme/material/vaadin-overlay.d.ts",
+        "vaadin__vaadin-overlay-tests.ts"
+    ]
+}

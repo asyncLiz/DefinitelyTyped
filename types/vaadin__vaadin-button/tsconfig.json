@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": [
+            "es6", "dom"
+        ],
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "baseUrl": "../",
+        "typeRoots": [
+            "../"
+        ],
+        "paths": {
+            "@vaadin/vaadin-button": [
+                "vaadin__vaadin-button"
+            ],
+            "@vaadin/vaadin-element-mixin": [
+                "vaadin__vaadin-element-mixin"
+            ],
+            "@vaadin/vaadin-control-state-mixin": [
+                "vaadin__vaadin-control-state-mixin"
+            ],
+            "@vaadin/vaadin-themable-mixin": [
+                "vaadin__vaadin-themable-mixin"
+            ]
+        },
+        "types": [],
+        "noEmit": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "index.d.ts",
+        "vaadin-button.d.ts",
+        "src/vaadin-button.d.ts",
+        "theme/lumo/vaadin-button.d.ts",
+        "theme/material/vaadin-button.d.ts",
+        "vaadin__vaadin-button-tests.ts"
+    ]
+}
